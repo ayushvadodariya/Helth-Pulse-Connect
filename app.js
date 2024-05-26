@@ -1,4 +1,5 @@
 require('dotenv').config();
+const cors = require('cors');
 
 const express = require("express");
 const http = require("http");
@@ -17,6 +18,7 @@ const PORT = process.env.PORT || 3000;
 connectMongoDb(process.env.MONGO_CONNECTION_URL)
   .then((e) => console.log("Mongodb connected"));
 
+app.use(cors());
 app.use(express.json());
 
 app.use('/api/v1/user', checkForAuthenticationToken(), userRouterV1);
